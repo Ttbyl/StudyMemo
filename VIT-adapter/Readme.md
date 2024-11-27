@@ -26,7 +26,7 @@ ViT-Adapter，源于一篇被ICLR 2023接受的论文，是一个面向密集型
 ## Spatial Prior Module
 - ***空间先验模块(Spatial Prior Module)***: 卷积可以帮助Transformer更好地学习局部空间信息。受此启发，提出了空间先验模块（SPM），通过利用卷积Stem(参考ResNet)以及若干额外的卷积层，得到了一个具有三种分辨率（1/8、1/16、1/32）的特征金字塔。最后将这些特征图展平并拼接，得到最终的空间先验特征。  
 
-<div style="text-align: center;">
+<div align="center">
   <img src="./imgs/Spatial_Prior_module.png" alt="Spatial Prior Module"/>
 </div>
 
@@ -109,15 +109,15 @@ class SpatialPriorModule(nn.Module):
 ```
 
 ## Spatial Feature Injector
-- ***空间特征注入器(Spatial Feature Injector)***: 将空间先验特征注入到Transformer的每个阶段中，将原先ViT原本的输入特征$F_{vit}^i$即$x$作为Query,$F_{sp}^i$即$c$作为Key和Value，输入到Cross-Attention中。在Injector中还设置了一个可学习的参数$\gamma$，用于控制空间先验特征与ViT特征融合的强度。在初始化的时候设置为0，保证在训练过程中，ViT特征能够先被学习。 
+- ***空间特征注入器(Spatial Feature Injector)***: 将空间先验特征注入到Transformer的每个阶段中，将原先ViT原本的输入特征$`F_{vit}^i`$即$`x`$作为Query,$`F_{sp}^i`$即$`c`$作为Key和Value，输入到Cross-Attention中。在Injector中还设置了一个可学习的参数$`\gamma`$，用于控制空间先验特征与ViT特征融合的强度。在初始化的时候设置为0，保证在训练过程中，ViT特征能够先被学习。 
 
-$$
+```math
 \hat{F}_{vit}^i = F_{vit}^1 + {\gamma}^i Attention(norm(F_{vit}^i),norm(F_{sp}^i) 
-$$
+```
 
 
 
-<div style="text-align: center;">
+<div align="center">
   <img src="./imgs/Spatial_Feature_Injector.png" alt="Spatial Feature Injector"/>
 </div>
 
@@ -154,19 +154,18 @@ class Injector(nn.Module):
 ```
 
 ## Multi-scale Feature Extractor
-- ***多尺度特征提取器(Multi-scale Feature Extractor)***: 主要由Cross-Attention和FFN组成，用于提取多尺度特征。这里的输入与Injector相反，将$F_{sp}^i$作为Query,$F_{vit}^i$作为Key和Value，输入到Cross-Attention中。这里就没有设置一个可学习的参数$\gamma$，因为空间先验特征已经通过Injector被注入到ViT中，所以这里只需要提取多尺度特征即可。
-  $$
-  \hat{F}_{sp}^i = F_{sp}^1 + Attention(norm(F_{sp}^i),norm(F_{vit}^{i+1}) 
-  $$
-   
+- ***多尺度特征提取器(Multi-scale Feature Extractor)***: 主要由Cross-Attention和FFN组成，用于提取多尺度特征。这里的输入与Injector相反，将$`F_{sp}^i`$作为Query,$`F_{vit}^i`$作为Key和Value，输入到Cross-Attention中。这里就没有设置一个可学习的参数$`\gamma`$，因为空间先验特征已经通过Injector被注入到ViT中，所以这里只需要提取多尺度特征即可。这里的$`F_{vit}^{i+1}`$和Injector相比经过了多一个ViT Block，所以这里是*i+1*。
+  
+```math
+\hat{F}_{sp}^i = F_{sp}^1 + Attention(\text{norm}(F_{sp}^i), \text{norm}(F_{vit}^{i+1}))
+```
+    
+```math
+F_{sp}^i = \hat{F}_{sp}^i + FFN(norm(\hat{F}_{sp}^i))
+```
 
-  这里的$F_{vit}^{i+1}$和Injector相比经过了多一个ViT Block，所以这里是*i+1*。
-  $$
-  F_{sp}^i = \hat{F}_{sp}^i + FFN(norm(\hat{F}_{sp}^i))
-  $$
-
-<div style="text-align: center;">
-  <img src="./imgs/Multi-scale_Feature_Extractor.png" alt="Multi-scale Feature Extractor"/>
+<div align="center">
+  <img src="./imgs/Multi-Scale_Feature_Extractor.png" alt="Multi-scale Feature Extractor"/>
 </div>
 
 
@@ -258,16 +257,16 @@ class DWConv(nn.Module):
 这里的代码片段是ViTAdapter模型的整体，它继承自TIMMVisionTransformer。ViTAdapter模型在原始ViT模型的基础上增加了一些新的模块，如SpatialPriorModule、InteractionBlock和deform_inputs。这些模块用于实现模型的自适应能力，以适应不同的任务和数据集。  
 模型参数如下：
 
-<div style="text-align: center;">
+<div align="center">
   <img src="./imgs/config_vit-adapater.png" alt="Multi-scale Feature Extractor"/>
 </div>
 
 这里的ViT-Adapter中的注意力模块是可以改变的，作者也在这上面做了一些消融实验。
-<div style="text-align: center;">
+<div align="center">
   <img src="./imgs/Ablation_different_attention.png" alt="Multi-scale Feature Extractor"/>
 </div>
 
-<div style="text-align: center;">
+<div align="center">
   <img src="./imgs/ViT_ViT-adapter_feature.png" alt="Multi-scale Feature Extractor"/>
 </div>
 
