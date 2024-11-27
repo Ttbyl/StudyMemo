@@ -31,7 +31,7 @@ ViT-Adapter，源于一篇被ICLR 2023接受的论文，是一个面向密集型
 
 ![Spatial Prior Module](https://raw.githubusercontent.com/Ttbyl/Pictures/main/pictures/Spatial_Prior_module.png)
 
-In [8]:
+
 
 ```
 class SpatialPriorModule(nn.Module):
@@ -120,8 +120,6 @@ $$
 
 ![Spatial Feature Injector](https://raw.githubusercontent.com/Ttbyl/Pictures/main/pictures/Spatial_Feature_Injector.png)
 
-In [9]:
-
 ```
 class Injector(nn.Module):
     def __init__(self, dim, num_heads=6, n_points=4, n_levels=1, deform_ratio=1.0,
@@ -164,7 +162,6 @@ $$
 
 ![Multi-scale Feature Extractor](https://raw.githubusercontent.com/Ttbyl/Pictures/main/pictures/Multi-scale_Feature_Extractor.png)
 
-In [10]:
 
 ```
 class Extractor(nn.Module):
