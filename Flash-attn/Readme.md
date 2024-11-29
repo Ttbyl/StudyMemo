@@ -18,34 +18,25 @@ Transformer 作为GPT类模型的基础架构提供了强大的特征处理能�
   - 算法流程只是分块计算，无近似操作。
 
 ## Standard Attention Implementation
-在注意力的一般实现中，对$\mathbf{Q}, \mathbf{K}, \mathbf{V} \in \mathbb{R}^{N \times d}$三个输入执行以下算法得到输出$\mathbf{O}$，其中softmax行级别执行。
-$$
-\mathbf{S}=\mathbf{Q K}^{\top} \in \mathbb{R}^{N \times N}, \quad \mathbf{P}=\operatorname{softmax}(\mathbf{S}) \in \mathbb{R}^{N \times N}, \quad \mathbf{O}=\mathbf{P} \mathbf{V} \in \mathbb{R}^{N \times d},
-$$
-在这个算法中，$\mathbf{S}, \mathbf{P}$矩阵都是很大，需要在HBM中实例化来进行存储，这样就会带来很多HBM的访问次数，最终体现到算法时间端到端较长的延迟。
+在注意力的一般实现中，对$`\mathbf{Q}, \mathbf{K}, \mathbf{V} \in \mathbb{R}^{N \times d}`$三个输入执行以下算法得到输出$`\mathbf{O}`$，其中softmax行级别执行。  
+$${S}={Q} {K}^{\top} \in {R}^{N \times N},\quad {P}={softmax}({S}) \in {R}^{N \times N},\quad {O}={P V} \in {R}^{N \times d},$$  
+在这个算法中，$`\mathbf{S}, \mathbf{P}`$矩阵都是很大，需要在HBM中实例化来进行存储，这样就会带来很多HBM的访问次数，最终体现到算法时间端到端较长的延迟。
 
 ![](./imgs/Standard-attention-implementation.png)
 
 ## softmax改进
 
 理论基础
-在传统算法中，一种方式是将Mask和SoftMax部分融合，以减少访存次数。然而，FlashAttention则更加激进，它将从输入$\mathbf{Q}, \mathbf{K}, \mathbf{V}$到输出$\mathbf{O}$的整个过程进行融合，以避免$\mathbf{S}, \mathbf{P}$矩阵的存储开销，实现端到端的延迟缩减。然而，由于输入的长度$N$通常很长，无法完全将完整的$\mathbf{Q}, \mathbf{K}, \mathbf{V},\mathbf{O}$及中间计算结果存储在SRAM中。因此，需要依赖HBM进行访存操作，与原始计算延迟相比没有太大差异，甚至会变慢（没具体测）。
+在传统算法中，一种方式是将Mask和SoftMax部分融合，以减少访存次数。然而，FlashAttention则更加激进，它将从输入$`\mathbf{Q}, \mathbf{K}, \mathbf{V}`$到输出$`\mathbf{O}`$的整个过程进行融合，以避免$`\mathbf{S}, \mathbf{P}`$矩阵的存储开销，实现端到端的延迟缩减。然而，由于输入的长度$`N`$通常很长，无法完全将完整的$`\mathbf{Q}, \mathbf{K}, \mathbf{V},\mathbf{O}`$及中间计算结果存储在SRAM中。因此，需要依赖HBM进行访存操作，与原始计算延迟相比没有太大差异，甚至会变慢（没具体测）。
 为了让计算过程的结果完全在SRAM中，摆脱对HBM的依赖，可以采用分片操作，每次进行部分计算，确保这些计算结果能在SRAM内进行交互，待得到对应的结果后再进行输出。
 这个过程中，有一点需要注意的是，之前对于softmax的计算是以行为单位的，如下所示：
-$$
-m(x):=\max _i x_i, \quad f(x):=\left[\begin{array}{lll}
-e^{x_1-m(x)} & \ldots & e^{x_B-m(x)}
-\end{array}\right], \quad \ell(x):=\sum_i f(x)_i, \quad \operatorname{softmax}(x):=\frac{f(x)}{\ell(x)}
-$$
+![](./imgs/softmax_1.svg)  
+
+
 当我们将输入进行分片后，无法对完整的行数据执行Softmax操作。这是因为Softmax函数在计算时需要考虑整个行的数据。然而，我们可以通过如下所示方法来获得与完整行Softmax相同的结果，而无需使用近似操作。
-$$
-\begin{aligned}
-& m(x)=m\left(\left[x^{(1)} x^{(2)}\right]\right)=\max \left(m\left(x^{(1)}\right), m\left(x^{(2)}\right)\right), \quad f(x)=\left[\begin{array}{ll}
-e^{m\left(x^{(1)}\right)-m(x)} f\left(x^{(1)}\right) & e^{m\left(x^{(2)}\right)-m(x)} f\left(x^{(2)}\right)
-\end{array}\right], \\
-& \ell(x)=\ell\left(\left[x^{(1)} x^{(2)}\right]\right)=e^{m\left(x^{(1)}\right)-m(x)} \ell\left(x^{(1)}\right)+e^{m\left(x^{(2)}\right)-m(x)} \ell\left(x^{(2)}\right), \quad \operatorname{softmax}(x)=\frac{f(x)}{\ell(x)} .
-\end{aligned}
-$$
+
+
+![](./imgs/softmax_2.svg)
 
 
 ```python
@@ -61,7 +52,7 @@ print(output)
              [0.0322, 0.1192, 0.3882, 0.1119, 0.3486]]])
     
 
-* 原始的softmax公式为 $$\operatorname{softmax}(\boldsymbol{x})_i=\frac{e^{\boldsymbol{x}_i}}{\sum_j e^{\boldsymbol{x}_j}}$$这里在代码中实现的时候通常会先减去最大值，然后计算指数，最后再归一化，这样做的目的是为了防止指数运算溢出。$$\operatorname{softmax}(\boldsymbol{x})_i=\frac{e^{x_i}}{\sum_j e^{x_j}}=\frac{e^{-m}}{e^{-m}} \frac{e^{x_i}}{\sum_j e^{x_j}}=\frac{e^{x_i-m}}{\sum_j e^{x_j-m}}$$
+* 原始的softmax公式为 $`{softmax}(\boldsymbol{x})_i=\frac{e^{\boldsymbol{x}_i}}{\sum_j e^{\boldsymbol{x}_j}}`$这里在代码中实现的时候通常会先减去最大值，然后计算指数，最后再归一化，这样做的目的是为了防止指数运算溢出。![](./imgs/softmax3.svg)
 
 
 ```python
