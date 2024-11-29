@@ -1,0 +1,82 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
+  <diagram name="第 1 页" id="svXqNsaHA9PHeSydD8tp">
+    <mxGraphModel dx="1077" dy="632" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="1" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-8" value="\[&lt;br&gt;\begin{bmatrix}&lt;br&gt;{x_{11}} &amp;amp; x_{12} \\&lt;br&gt;x_{21} &amp;amp; x_{22} \\&lt;br&gt;x_{31} &amp;amp; x_{32} \\&lt;br&gt;x_{41} &amp;amp; x_{42} \\&lt;br&gt;x_{51} &amp;amp; x_{52}&lt;br&gt;\end{bmatrix}&lt;br&gt;\]" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="20" y="40" width="120" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-10" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="390" y="93" width="20" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-11" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="540" y="300" width="20" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-12" value="\[\begin{bmatrix}&lt;br&gt;m^{1}_1 \\&lt;br&gt;m^{1}_2 \\&lt;br&gt;m^{1}_3 \\&lt;br&gt;m^{1}_4 \\&lt;br&gt;m^{1}_5&lt;br&gt;\end{bmatrix} =&lt;br&gt;\begin{bmatrix}&lt;br&gt;\max(x_{11},x_{12}) \\&lt;br&gt;\max(x_{21} ,x_{22}) \\&lt;br&gt;\max(x_{31}, x_{32}) \\&lt;br&gt;\max(x_{41}, x_{42}) \\&lt;br&gt;\max(x_{51}, x_{52})&lt;br&gt;\end{bmatrix}&amp;nbsp;&lt;br&gt;&lt;br&gt;\]&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="240" width="140" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-22" value="\[&lt;br&gt;\begin{bmatrix}&lt;br&gt;{x_{13}} &amp;amp; x_{14} \\&lt;br&gt;x_{23} &amp;amp; x_{24} \\&lt;br&gt;x_{33} &amp;amp; x_{34} \\&lt;br&gt;x_{43} &amp;amp; x_{44} \\&lt;br&gt;x_{53} &amp;amp; x_{54}&lt;br&gt;\end{bmatrix}&lt;br&gt;\]" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="100" y="40" width="120" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-23" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="56.5" width="160" height="107" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-24" value="\[&lt;br&gt;\begin{bmatrix}&lt;br&gt;\max(x_{13},x_{14}) \\&lt;br&gt;\max(x_{23} ,x_{24}) \\&lt;br&gt;\max(x_{33}, x_{34}) \\&lt;br&gt;\max(x_{43}, x_{44}) \\&lt;br&gt;\max(x_{53}, x_{54})&lt;br&gt;\end{bmatrix} =&amp;nbsp;&lt;br&gt;\begin{bmatrix}&lt;br&gt;m^{2}_1 \\&lt;br&gt;m^{2}_2 \\&lt;br&gt;m^{2}_3 \\&lt;br&gt;m^{2}_4 \\&lt;br&gt;m^{2}_5&lt;br&gt;\end{bmatrix}&lt;br&gt;\]&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="400" width="140" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-38" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="560" y="50" width="180" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-29" value="$$=\begin{bmatrix}m_1 \\m_2 \\m_3 \\m_4 \\m_5\end{bmatrix}$$" style="text;whiteSpace=wrap;" vertex="1" parent="JIM3-3Pzc6GVRmSzShYT-38">
+          <mxGeometry x="140" width="40" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-37" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="560" y="55" width="135" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-32" value="$$max$$" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="JIM3-3Pzc6GVRmSzShYT-37">
+          <mxGeometry y="45" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-35" value="" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.annotation_1;align=left;pointerEvents=1;" vertex="1" parent="JIM3-3Pzc6GVRmSzShYT-37">
+          <mxGeometry x="59" width="10" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-36" value="" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.annotation_1;align=left;pointerEvents=1;rotation=-180;" vertex="1" parent="JIM3-3Pzc6GVRmSzShYT-37">
+          <mxGeometry x="125" width="10" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-30" value="$$\begin{bmatrix}m^{1}_1 \\m^{1}_2 \\m^{1}_3 \\m^{1}_4 \\m^{1}_5\end{bmatrix}$$" style="text;whiteSpace=wrap;" vertex="1" parent="JIM3-3Pzc6GVRmSzShYT-37">
+          <mxGeometry x="59" y="-10" width="40" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-31" value="$$\begin{bmatrix}m^{2}_1 \\m^{2}_2 \\m^{2}_3 \\m^{2}_4 \\m^{2}_5\end{bmatrix}$$" style="text;whiteSpace=wrap;" vertex="1" parent="JIM3-3Pzc6GVRmSzShYT-37">
+          <mxGeometry x="95" y="-10" width="40" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-39" value="$$scale = e^{m^{j}_i-m_i}$$" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="200" y="310" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-41" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="240" y="190" width="315" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-16" value="$$&#xa;\left[\begin{array}{cc}&#xa;e^{x_{11}-m_1} &amp; e^{x_{12}-m_1} \\&#xa;e^{x_{21}-m_2} &amp; e^{x_{22}-m_2} \\&#xa;e^{x_{31}-m_3} &amp; e^{x_{32}-m_3} \\&#xa;e^{x_{41}-m_4} &amp; e^{x_{42}-m_4} \\&#xa;e^{x_{51}-m_5} &amp; e^{x_{52}-m_5}&#xa;\end{array}\right]&#xa;$$" style="text;whiteSpace=wrap;" vertex="1" parent="JIM3-3Pzc6GVRmSzShYT-41">
+          <mxGeometry x="5" width="130" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-19" value="$$&#xa;\left[\begin{array}{cc}&#xa;e^{x_{13}-m_1} &amp; e^{x_{14}-m_1} \\&#xa;e^{x_{23}-m_2} &amp; e^{x_{24}-m_2} \\&#xa;e^{x_{33}-m_3} &amp; e^{x_{34}-m_3} \\&#xa;e^{x_{43}-m_4} &amp; e^{x_{44}-m_4} \\&#xa;e^{x_{53}-m_5} &amp; e^{x_{54}-m_5}&#xa;\end{array}\right]&#xa;$$" style="text;whiteSpace=wrap;" vertex="1" parent="JIM3-3Pzc6GVRmSzShYT-41">
+          <mxGeometry x="124" width="130" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-40" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.rect;fillColor2=none;strokeWidth=1;size=20;indent=5;fillColor=none;" vertex="1" parent="JIM3-3Pzc6GVRmSzShYT-41">
+          <mxGeometry y="10" width="255" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-44" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; background-color: rgb(251, 251, 251); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;&quot;&gt;$$scale_1 = e^{m^{1}_i-m_i}$$&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="JIM3-3Pzc6GVRmSzShYT-41">
+          <mxGeometry x="20" y="-30" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-45" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; background-color: rgb(251, 251, 251); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;&quot;&gt;$$scale_2 = e^{m^{2}_i-m_i}$$&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="JIM3-3Pzc6GVRmSzShYT-41">
+          <mxGeometry x="135" y="-30" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-42" value="$$f(x)$$" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="180" y="240" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="JIM3-3Pzc6GVRmSzShYT-43" value="$$softmax=\frac{scale*f(x)}{\sum_{i=1}^n scale*f(x)} $$" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="180" y="350" width="310" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
