@@ -3,7 +3,7 @@ import torch.nn
 import math
 import warnings
 class LinearLora(torch.nn.Module):
-    def __init__(self,input_features, output_features, r=4, lora_alpha=1, dropout= 0.1 ,merge=False):
+    def __init__(self,input_features, output_features, r=4, lora_alpha=8, dropout= 0.1 ,merge=False):
         super(LinearLora, self).__init__()
         self.input_features = input_features
         self.output_features = output_features

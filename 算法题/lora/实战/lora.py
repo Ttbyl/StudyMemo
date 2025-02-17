@@ -2,8 +2,8 @@
 Author: Wangzhibo && ttbylzb11@gmail.com
 Date: 2025-02-14 09:34:46
 LastEditors: Wanzhiboo && ttbylzb11@gmail.com
-LastEditTime: 2025-02-14 15:00:12
-FilePath: /StudyMemo/算法题/lora/lora.py
+LastEditTime: 2025-02-14 16:00:44
+FilePath: /实战/lora.py
 Description: 
 
 Copyright (c) 2025 by ttbylzb11@gmail.com, All Rights Reserved. 
@@ -34,15 +34,6 @@ class lora(nn.Module):
         nn.init.zeros_(self.lora_b)
 
     def forward(self, x):
+        x = x.view(-1, self.in_features)
         x = self.scaling * x @ self.lora_a @ self.lora_b
         return x
-
-
-if __name__ == '__main__':
-    model = nn.Linear(10, 20) # 这里Linear是全连接，冻结
-    lora_model = lora(10, 20)
-    input = torch.randn(20, 10)
-    output = model(input)
-    lora_output = lora_model(input)
-    print(output.shape)
-    print(lora_output.shape)
