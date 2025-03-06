@@ -1,3 +1,13 @@
+'''
+Author: Wangzhibo && ttbylzb11@gmail.com
+Date: 2025-02-17 17:34:11
+LastEditors: Wanzhiboo && ttbylzb11@gmail.com
+LastEditTime: 2025-03-04 10:23:47
+FilePath: /StudyMemo/算法题/Self-atten/Self-attenV3.py
+Description: 
+
+Copyright (c) 2025 by ttbylzb11@gmail.com, All Rights Reserved. 
+'''
 import math
 import torch
 import torch.nn as nn
